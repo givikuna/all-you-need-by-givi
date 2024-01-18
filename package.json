@@ -1,0 +1,11 @@
+{
+  "name": "ayn",
+  "version": "1.0.0",
+  "description": "teehee (not production ready this is just me messing around for personal stuff, this is absolutely unstable and not recommended)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
