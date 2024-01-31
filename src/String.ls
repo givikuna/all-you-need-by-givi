@@ -44,3 +44,5 @@ export trim-end = (.trim-end!)
 export trim = (.trim!)
 
 export charcode = (.char-code-at 0)
+
+export palindrome = (s) --> s is s.split '' .reverse!join ''

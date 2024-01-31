@@ -8,3 +8,8 @@ export str = (s) -->
 export int = (n) --> if typeof n is \number then Math.floor Number n
 
 export bool = Boolean
+
+export make-hash = (xs) -->
+    obj = {}
+    xs.for-each (x) --> obj[x[0]] = x[1]
+    obj

@@ -79,3 +79,76 @@ export remove-all = (x, xs) --> replace-all x, '', xs
 export iter = Array.from >> (.entries!)
 
 export index-of = (x, xs) --> xs.index-of x
+
+export transpose = (arr) -->
+    if not arr or arr.length is 0 or arr[0].length is 0 then return []
+    row-count = arr.length
+    col-count = arr[0].length
+    transposed-arr = []
+    col = 0
+    while col < col-count
+        transposed-arr[col] = []
+        row = 0
+        while row < row-count
+            transposed-arr[col][row] = arr[row][col]
+            row += 1
+        col += 1
+    transposed-arr
+
+export chunk = (arr, size) -->
+    chunked-arr = []
+    i = 0
+    while i < arr.length
+        chunk_ = arr.slice i, (i + size)
+        chunked-arr.push chunk
+        i += 1
+    chunked-arr
+
+export foldstr = (f, xs) --> fold f, '', xs
+
+export foldt = (f, xs) --> fold f, true, xs
+
+export foldf = (f, xs) --> fold f, false, xs
+
+export append = (++)
+
+export list-append = append
+
+export ǀ = len
+
+export uniq = (xs) --> [...(new Set xs)]
+
+export list = (...args) -> [...args]
+
+export to_set = (new Set)
+
+export Ø = len >> (< 1)
+
+export ϵ = (x, xs) --> x in xs
+
+export ᐡ = (++) >> uniq
+
+export union = ᐡ
+
+export ᐢ = (xs, ys) --> uniq (++) [x for x in xs when x in ys] [y for y in ys when y in xs]
+
+export intersection = ᐢ
+
+export ᑦ = (xs, ys) -->
+    xsu = uniq xs
+    ysu = uniq ys
+    ϵ on [(x `ϵ` ysu) for x in xsu]
+
+export proper-subset = ᑦ
+
+export ᐣ = flip ᑦ
+
+export proper-superset = ᐣ
+
+export negate = --> if (<) 0 it then -it else it
+
+export neg = negate
+
+export ᐨ = neg
+
+export ᕀ =--> if (>) 0 it then -it else it

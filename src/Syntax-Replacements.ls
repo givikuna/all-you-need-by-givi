@@ -14,3 +14,20 @@ export cond = (conditions) ->
     null
 
 export expt = ((f, x, y) --> f y, x) Math.pow
+
+export sleep = ( amount, type = \milliseconds ) ->
+    multiplier = do ->
+        if type is \seconds then return 1000
+        if type is \hours then return 3600000
+        if type is \days then return 86400000
+        return 1
+    start = new Date!get-time!
+    while (new Date!get-time! - start) < (multiplier * amount)
+        null
+    return
+
+export pipe = (x, ...fs) ->
+    y = x
+    for f in fs
+        y = f y
+    y
