@@ -1,4 +1,4 @@
-declare module "ayn" {
+declare module "all-you-need-by-givi" {
     // Types
     export type HashMap<T> = { [key: string]: T };
 
