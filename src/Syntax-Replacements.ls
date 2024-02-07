@@ -5,15 +5,13 @@ export cond = (conditions) ->
                 return condition[1]!
             else
                 return condition[1]
-    if conditions[condition.length - 1] is \else
+    if conditions[condition.length - 1][0] is \else
         x = conditions[conditions.length - 1]
         if x instanceof Function then do
             return x!
         else
             return x
     null
-
-export expt = ((f, x, y) --> f y, x) Math.pow
 
 export sleep = ( amount, type = \milliseconds ) ->
     multiplier = do ->

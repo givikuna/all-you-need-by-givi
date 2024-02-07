@@ -1,3 +1,11 @@
+export negate = --> if (<) 0 it then -it else it
+
+export neg = negate
+
+export ᐨ = neg
+
+export ᕀ =--> if (>) 0 it then -it else it
+
 export random = (min-val, max-val) -->
     if min-val >= max-val then return min-val
     max-val
@@ -12,7 +20,7 @@ export dec = (- 1)
 
 export add = (+)
 
-export minus = (-)export is-numeric = /^[-+]?\d+(\.\d+)?$/.test
+export minus = (-)
 
 export multiply = (*)
 
@@ -22,7 +30,7 @@ export equals = (===)
 
 export expt = ((^) |> ((f, x, y) --> f y, x))
 
-export pow = (^)
+export pow = Math.pow
 
 export expm1 = Math.expm1
 
@@ -56,7 +64,7 @@ export arccsc = (1 /) >> Math.asin
 
 export arcsec = (1 /) >> Math.acos
 
-export arctan = (1 /) >> Math.atan
+export arccot = (1 /) >> Math.atan
 
 export to-rad = (* Math.PI) >> (/ 180.0deg)
 
@@ -125,8 +133,6 @@ export is-int = Number.is-integer
 export summation = (n, i, f) --> fold0 (+), [f x for x in [i to n]]
 
 export Σ = --> foldl0 (+), it
-
-export invert-matrix = mathjs.inv
 
 export add-matrix = (xs, ys) --> xs.map (a, i) -> a.map (x, j) -> x + ys[i][j]
 
@@ -202,4 +208,3 @@ export gcf = gcd
 export lcm = (n, m) --> (n * m) / gcd n, m
 
 export ǁ = Math.abs
-

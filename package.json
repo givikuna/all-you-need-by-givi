@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "livescript": "^1.6.0"
+    "@types/node": "^20.11.14",
+    "livescript": "^1.6.0",
+    "prettier": "^3.2.4",
+    "ts-node": "^10.9.2"
   }
 }

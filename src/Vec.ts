@@ -1,4 +1,4 @@
-class Vec<T> {
+export class Vec<T> {
     private arr: T[];
 
     constructor(arr: Vec<T> | T[] | Set<T> | Iterable<T> | ReadonlyArray<T> | string) {
@@ -10,10 +10,10 @@ class Vec<T> {
             arr instanceof Vec
                 ? arr.unwrap()
                 : arr instanceof Set || is_iter(arr)
-                ? [...arr]
-                : typeof arr === "string"
-                ? arr.split("")
-                : Array.from(arr)
+                  ? Array.from(arr as T[])
+                  : typeof arr === "string"
+                    ? arr.split("")
+                    : Array.from(arr)
         ) as T[];
     }
 
@@ -130,7 +130,7 @@ class Vec<T> {
     }
 
     uniq(): Vec<T> {
-        return Vec.from([...new Set(this.clone().unwrap() satisfies T[])]);
+        return Vec.from(Array.from(new Set(this.clone().unwrap() satisfies T[])));
     }
 
     chunk(size: number): Vec<Vec<T>> {
@@ -258,7 +258,7 @@ class Vec<T> {
 
     map2<U, N>(f: (x: T, y: N) => U, arr: Vec<N> | N[] | Set<N>): Vec<U> {
         const xs: T[] = this.clone().unwrap();
-        const ys: N[] = arr instanceof Vec ? arr.unwrap() : arr instanceof Set ? [...arr] : arr;
+        const ys: N[] = arr instanceof Vec ? arr.unwrap() : arr instanceof Set ? Array.from(arr) : arr;
         return new Vec(xs.map((x: T, i: number): U => f(x, ys[i])));
     }
 

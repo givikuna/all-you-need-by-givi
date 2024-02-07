@@ -38,18 +38,16 @@ export lazy = (f) -->
             evaluated = yes
         result
 
-export pipe = (x, fs) -> Array.from fs .reduce ((f, val) -> f val), x
-
 export say = console.log
 
 export p = console.log
 
-export lambda = (f) --> (..args) -> f ...args
+export lambda = (f) --> f
 
 export fn = lambda
 
 export λ = lambda
-
+-
 export ƒ = lambda
 
 export memoize = (f) ->
@@ -59,42 +57,4 @@ export memoize = (f) ->
         res = f args[0]
         cache[n] = res
         res
-
-export before = (before-func, func) -->
-    (...args) ->
-        before-func!
-        func ...args
-
-export after = (func, after-func) -->
-    (...args) ->
-        result = func ...args
-        after-func!
-        result
-
-export throttle = (func, delay) ->
-    last-time = 0
-    (...args) ->
-        current-time = Date.now!
-        if (current-time - last-time) >= delay then do
-            func.apply this, args
-            last-time = current-time
-        return
-
-export debounce = (func, delay) ->
-    timeout-id = null
-    (...args) ->
-        clear-timeout timeout-id
-        timeout-id = set-timeout do
-            -> func ...args
-            delay
-        return
-
-export lazy = (f) ->
-    evaluated = no
-    result = null
-    (...args) ->
-        if not evaluated
-            result = func ...args
-            evaluated = yes
-        result
 

@@ -1,4 +1,4 @@
-export rev = (Array.from) >> (.reverse!)
+export rev = (xs) --> if typeof xs is \string then xs.spit '' .reverse!join '' else (.reverse!) Array.from xs
 
 export fold = (f, z, xs) -->
     memo = z
@@ -36,13 +36,13 @@ export reject = (f, xs) --> filter ((not) >> f), xs
 
 export partition = (f, xs) --> [(filter f, xs), (rejecet f, xs)]
 
-export map = (f, xs) --> [f x for x in xs]
+export map = (f, xs) --> xs.map f
 
 export freq = (k, xs) --> [x for x in xs when x is k]length
 
 export len = (.length)
 
-export enumerate = (.entries!) >> Array.from
+export enumerate = (xs) --> i = 0; [[i++, x] x for x in xs]
 
 export member = (k, xs) --> k in xs
 
@@ -56,7 +56,7 @@ export list-ref = (i, xs) --> if (>) 0 i then xs[xs.length + n] else xs[i]
 
 export hash-ref = (k, xs) --> xs[k]
 
-export build-list = (n, f) --> [0 til n].map f
+export build-list = (f, n) --> [0 til n].map f
 
 export sort = (xs) -->
     if (>=) 1 xs.length then return Array.from xs
@@ -64,21 +64,22 @@ export sort = (xs) -->
     pivot = xs[0]
     left = []
     right = []
-    for i in [1 til xs.length] (if xs[i] < pivot then left else right).push xs[i]
+    for i in [1 til xs.length]
+        (if xs[i] < pivot then left else right).push xs[i]
 
-    return sort left .concat pivot, sort right
+    return sort(left)concat pivot, sort right
 
 export list-to = (x, y) --> [x to y]
 
 export list-til = (x, y) --> [x til y]
 
-export replace-all = (x1, x2, xs) --> typeof xs is \string then xs.replace-all x1, x2 else xs.map ((x) --> x is x1 then x2 else x)
+export replace-all = (x1, x2, xs) --> if typeof xs is \string then xs.replace-all x1, x2 else xs.map (x) --> if x is x1 then x2 else x
 
-export remove-all = (x, xs) --> replace-all x, '', xs
+export remove-all = (x, xs) --> if typeof xs is \string replace-all x, '', xs else filter ((not) >> (is x)), xs
 
 export iter = Array.from >> (.entries!)
 
-export index-of = (x, xs) --> xs.index-of x
+export index-of = (k, xs) --> xs.index-of k
 
 export transpose = (arr) -->
     if not arr or arr.length is 0 or arr[0].length is 0 then return []
@@ -104,13 +105,11 @@ export chunk = (arr, size) -->
         i += 1
     chunked-arr
 
-export foldstr = (f, xs) --> fold f, '', xs
+export foldstr = (f, xs) --> fold f, '', (if typeof xs is \string then xs.split '' else xs)
 
 export foldt = (f, xs) --> fold f, true, xs
 
 export foldf = (f, xs) --> fold f, false, xs
-
-export append = (++)
 
 export list-append = append
 
@@ -120,9 +119,7 @@ export uniq = (xs) --> [...(new Set xs)]
 
 export list = (...args) -> [...args]
 
-export to_set = (new Set)
-
-export Ø = len >> (< 1)
+export Ø = (len) >> (< 1)
 
 export ϵ = (x, xs) --> x in xs
 
@@ -141,14 +138,8 @@ export ᑦ = (xs, ys) -->
 
 export proper-subset = ᑦ
 
-export ᐣ = flip ᑦ
+export ᐣ = ((f, x, y) --> f y, x) ᑦ
 
 export proper-superset = ᐣ
 
-export negate = --> if (<) 0 it then -it else it
-
-export neg = negate
-
-export ᐨ = neg
-
-export ᕀ =--> if (>) 0 it then -it else it
+export compact = (xs) --> [x for x in xs when x]
