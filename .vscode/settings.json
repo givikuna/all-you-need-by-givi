@@ -9,7 +9,9 @@
         "foldr",
         "foldstr",
         "foldt",
+        "givi",
         "lispy",
+        "livescript",
         "supertrim"
     ]
 }
